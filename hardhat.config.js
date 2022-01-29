@@ -26,7 +26,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
       chainId: 1337
     },
     ropsten: {
-      url: "https://ropsten.infura.io/v3/da84f2dd1dca4bfea35a35d778de8947",
+      url: process.env.INFURA_ROPSTEN_URL,
       accounts: [`0x${process.env.CONTRACT_DEPLOY_WALLET_PRIVATE_KEY}`]
     }
   }
