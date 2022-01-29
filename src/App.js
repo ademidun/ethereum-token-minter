@@ -2,11 +2,11 @@ import './App.css';
 import { useState } from 'react';
 import { ethers } from 'ethers'
 import Greeter from './artifacts/contracts/Greeter.sol/Greeter.json'
-import Token from './artifacts/contracts/Token.sol/Token.json'
+import TomiwaTestToken from './artifacts/contracts/Token.sol/TomiwaTestToken.json'
 
 // Update with the contract address logged out to the CLI when it was deployed 
-const greeterAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-const tokenAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
+const greeterAddress = "0x2f0679B9F30A460C5bbfD3649e067AC5425543Eb"
+const tokenAddress = "0xDf26a46Ca1a6BB2457aCd92347B8250f51CBA5C3";
 
 function App() {
   // store greeting in local state
@@ -51,7 +51,7 @@ function App() {
     if (typeof window.ethereum !== 'undefined') {
       const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' })
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const contract = new ethers.Contract(tokenAddress, Token.abi, provider)
+      const contract = new ethers.Contract(tokenAddress, TomiwaTestToken.abi, provider)
       const balance = await contract.balanceOf(account);
       console.log("Balance: ", balance.toString());
     }
@@ -62,7 +62,7 @@ function App() {
       await requestAccount()
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      const contract = new ethers.Contract(tokenAddress, Token.abi, signer);
+      const contract = new ethers.Contract(tokenAddress, TomiwaTestToken.abi, signer);
       const transation = await contract.transfer(userAccount, amount);
       await transation.wait();
       console.log(`${amount} Coins successfully sent to ${userAccount}`);
